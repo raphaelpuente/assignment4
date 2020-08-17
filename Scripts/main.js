@@ -1,4 +1,11 @@
-﻿/// <reference path="jquery.js" />
+﻿/* Description: IIFE - Immediately Invokes Function Expression
+   File: Assignment4
+   Name: Raphael Puente 
+   Id: 301075627 
+   Webpage: https://raphaelpuente.github.io/assignment4/index.html*/
+
+
+/// <reference path="jquery.js" />
 var playerMoney = 1000;
 var winnings = 0;
 var jackpot = 5000;

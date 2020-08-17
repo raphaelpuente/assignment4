@@ -1,0 +1,18 @@
+﻿/* Description: Custom SS goes in here
+   File: Assignment4
+   Name: Raphael Puente 
+   Id: 301075627 
+   Webpage: https://raphaelpuente.github.io/assignment4/index.html*/
+   
+
+ul#playerStats {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px;
+}
+
+#canvas
+{
+    margin-left: 10px;
+    border: 1px solid black;
+}

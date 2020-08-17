@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <title>Slot Machine</title>
     <!-- CSS Section -->
-    <link href="css/main.css" rel="stylesheet" />
+    <link href="Content/main.css" rel="stylesheet" />
 </head>
 <body>
+
+    <!-- Canvas Contaniner -->
+    <canvas id="canvas" width="680" height="480"></canvas>
+
     <div>
         <h1>Slot Machine</h1>
         <div>
@@ -44,9 +48,18 @@
         <p></p>
     </div>
 
+    <!-- 3rd Party Libraries -->
+    <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
+    <script src="./node_modules/tweenjs/lib/tweenjs.min.js"></script>
+    <script src="./node_modules/soundjs/lib/soundjs.min.js"></script>
+    <script src="./node_modules/preloadjs/lib/preloadjs.min.js"></script>
 
-    <!-- JavaScript Section -->
-    <script src="js/jquery.js"></script>
-    <script src="js/main.js"></script>
+
+
+    <!-- Custom App Scripts -->
+    <script type="module" src="./Scripts/app.js"></script>
+    <script src="Scripts/jquery.js"></script>
+    <script src="Scripts/main.js"></script>
+
 </body>
 </html>
