@@ -10,6 +10,10 @@
     var jackpotLabel;
     var creditLabel;
     var winningLabel;
+    var leftReel;
+    var middleReel;
+    var rightReel;
+    var betLine;
     var manifest = [
         { id: "background", src: "./Assets/background.png" },
         { id: "banana", src: "./Assets/banana.gif" },
@@ -94,6 +98,18 @@
         //bet label
         winningLabel = new UIObjects.Label("99999", "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X, 351, true);
         stage.addChild(winningLabel);
+        //left reel
+        leftReel = new Core.GameObject("bell", Config.Screen.CENTER_X - 79, Config.Screen.CENTER_Y - 8, true);
+        stage.addChild(leftReel);
+        //middle reel
+        middleReel = new Core.GameObject("banana", Config.Screen.CENTER_X - 1, Config.Screen.CENTER_Y - 8, true);
+        stage.addChild(middleReel);
+        //right reel
+        rightReel = new Core.GameObject("bar", Config.Screen.CENTER_X + 77, Config.Screen.CENTER_Y - 8, true);
+        stage.addChild(rightReel);
+        //bet line
+        betLine = new Core.GameObject("bet_line", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 13, true);
+        stage.addChild(betLine);
     }
     window.addEventListener("load", Preload);
 })();
