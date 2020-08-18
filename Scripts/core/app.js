@@ -7,6 +7,9 @@
     var bet10Button;
     var bet100Button;
     var betMaxButton;
+    var jackpotLabel;
+    var creditLabel;
+    var winningLabel;
     var manifest = [
         { id: "background", src: "./Assets/background.png" },
         { id: "banana", src: "./Assets/banana.gif" },
@@ -79,6 +82,18 @@
         betMaxButton.on("click", function () {
             console.log("Clicked BetMax Button");
         });
+        //jackpot label
+        jackpotLabel = new UIObjects.Label("999999999", "20px", "Consoles", "#FF0000", Config.Screen.CENTER_X, 68, true);
+        stage.addChild(jackpotLabel);
+        //credits label
+        creditLabel = new UIObjects.Label("999999999", "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X - 95, 351, true);
+        stage.addChild(creditLabel);
+        //winnings label
+        winningLabel = new UIObjects.Label("999999999", "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X + 95, 351, true);
+        stage.addChild(winningLabel);
+        //bet label
+        winningLabel = new UIObjects.Label("99999", "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X, 351, true);
+        stage.addChild(winningLabel);
     }
     window.addEventListener("load", Preload);
 })();
