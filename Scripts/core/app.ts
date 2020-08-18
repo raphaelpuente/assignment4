@@ -1,9 +1,8 @@
 (function(){
 
     let stage: createjs.Stage;
-    let helloLabel: createjs.Text;
-    let clickButton: createjs.Bitmap;
     let assets: createjs.LoadQueue;
+    let slotMachineBackground: Core.GameObject;
 
     let manifest: Core.Item[] = [
         {id:"background", src:"./Assets/background.png"},
@@ -28,66 +27,36 @@
     {
         assets = new createjs.LoadQueue();
         assets.installPlugin(createjs.Sound);
-        assets.on("complete",Start);
+        assets.on("complete", Start);
         assets.loadManifest(manifest);
     }
 
     function Start():void
     {
+        console.log("App started...");  
         let canvas = document.getElementById("canvas") as HTMLCanvasElement;
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = 60;
-        createjs.Ticker.on("tick",Update);
-
-        console.log("App started...");
+        createjs.Ticker.on("tick", Update);
 
         stage.enableMouseOver(20);
+
+        Config.Globals.AssetManifest = assets;
 
         Main();
     }
 
     function Update():void
-    {
-        
-        
+    {      
         stage.update();
     }
  
 
     function Main():void
     {
-        helloLabel = new createjs.Text("Hello world","40px Consolas","#000000");
-        helloLabel.regX = helloLabel.getMeasuredWidth() * 0.5;
-        helloLabel.regY = helloLabel.getMeasuredHeight() * 0.5;
-        helloLabel.x = 320;
-        helloLabel.y = 240;
+       slotMachineBackground = new Core.GameObject("background", 320,240,true);
+       stage.addChild(slotMachineBackground);
 
-        stage.addChild(helloLabel);
-
-        //buton
-        clickButton = new createjs.Bitmap("/Assets/button.png");
- 
-
-        clickButton.regX = clickButton.getBounds().height * 0.5;
-        clickButton.regY = clickButton.getBounds().width * 0.5;
-        clickButton.x = 320;
-        clickButton.y = 350;
-
-        stage.addChild(clickButton);
-
-        clickButton.on("click", ()=>{
-            helloLabel.text = "Adios, mundo cruel!";
-            helloLabel.regX = helloLabel.getMeasuredWidth() * 0.5;
-            helloLabel.regY = helloLabel.getMeasuredHeight() * 0.5;
-        });
-
-        clickButton.on("mouseover", ()=>{
-            clickButton.alpha = 0.7;
-        });
-
-        clickButton.on("mouseover", ()=>{
-            clickButton.alpha = 1.0;
-        });   
     }
 
     window.addEventListener("load",Preload);
