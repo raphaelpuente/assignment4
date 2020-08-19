@@ -1,5 +1,4 @@
 (function () {
-    /// <reference path="jquery.js" />
     //#region - objects
     //stage, assets and game objects
     var stage;
