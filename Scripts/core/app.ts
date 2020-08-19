@@ -59,6 +59,7 @@
         let winRatio = 0;
     //#endregion
 
+    //#region - manifest
     let manifest: Core.Item[] = [
         {id:"background", src:"./Assets/background.png"},
         {id:"banana", src:"./Assets/banana.gif"},
@@ -78,6 +79,7 @@
         {id:"clearButton", src:"./Assets/clearButton.png"},
         {id:"quitButton", src:"./Assets/quitButton.png"}
     ];
+    //#endregion
 
     function Preload():void
     {
@@ -107,18 +109,6 @@
         stage.update();
     }
  
-
-    function showPlayerStats():void
-    {
-        winRatio = winNumber / turn;
-        $("#jackpot").text("Jackpot: " + jackpot);
-        $("#playerMoney").text("Player Money: " + playerMoney);
-        $("#playerTurn").text("Turn: " + turn);
-        $("#playerWins").text("Wins: " + winNumber);
-        $("#playerLosses").text("Losses: " + lossNumber);
-        $("#playerWinRatio").text("Win Ratio: " + (winRatio * 100).toFixed(2) + "%");
-    }
-
     function resetFruitTally():void 
     {
         //this function resets fruit tallies
@@ -153,8 +143,6 @@
         stage.removeChild(winningLabel);
     }
 
-    
-    /* Check to see if the player won the jackpot */
     function checkJackPot():void
     {
         /* compare two random values */
@@ -167,7 +155,6 @@
         }
     }
 
-    /* Utility function to show a win message and increase player money */
     function showWinMessage() {
         playerMoney += winnings;
         stage.removeChild(lossMessage);
@@ -178,7 +165,6 @@
         checkJackPot();
     }
 
-    /* Utility function to show a loss message and reduce player money */
     function showLossMessage() {
         playerMoney -= playerBet;
         stage.removeChild(lossMessage);
@@ -304,6 +290,7 @@
         }
         
     }
+    
     function buildInterface():void
     {
         //background image
@@ -463,7 +450,6 @@
             {
                 if (confirm("You ran out of Money! \nDo you want to play again?")) {
                     resetAll();
-                    showPlayerStats();
                 }
             }
             else if (playerBet > playerMoney) {
@@ -474,11 +460,11 @@
             }
             else if (playerBet <= playerMoney) {
                 spinResult = Reels();
-                fruits = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
-                $("div#result>p").text(fruits);
+
+
                 determineWinnings();
                 turn++;
-                showPlayerStats();
+
             }
             else {
                 alert("Please enter a valid bet amount");
