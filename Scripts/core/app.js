@@ -45,7 +45,6 @@
     var winNumber = 0;
     var lossNumber = 0;
     var spinResult;
-    var fruits = "";
     var winRatio = 0;
     //#endregion
     //#region - manifest
@@ -87,6 +86,9 @@
     }
     function Update() {
         stage.update();
+    }
+    function showPlayerStats() {
+        winRatio = winNumber / turn;
     }
     function resetFruitTally() {
         //this function resets fruit tallies
@@ -349,24 +351,10 @@
             leftReel.image = assets.getResult(reels[0]);
             middleReel.image = assets.getResult(reels[1]);
             rightReel.image = assets.getResult(reels[2]);
-            //updating the credit Label
-            stage.removeChild(creditLabel);
-            creditLabel = new UIObjects.Label(playerMoney.toString(), "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X - 95, 351, true);
-            stage.addChild(creditLabel);
-            stage.removeChild(winningLabel);
-            winningLabel = new UIObjects.Label(winnings.toString(), "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X + 95, 351, true);
-            stage.addChild(winningLabel);
-            //updating the turns label
-            stage.removeChild(turnsLabel);
-            turnsLabel = new UIObjects.Label("Turn: " + turn, "20px", "Consoles", "#000000", Config.Screen.CENTER_X + 230, Config.Screen.CENTER_Y + 25, true);
-            stage.addChild(turnsLabel);
-            //updating the winratio label
-            stage.removeChild(winRatioLabel);
-            winRatioLabel = new UIObjects.Label("Ratio: " + (winRatio * 100).toFixed(2) + "%", "20px", "Consoles", "#000000", Config.Screen.CENTER_X + 255, Config.Screen.CENTER_Y + 50, true);
-            stage.addChild(winRatioLabel);
             if (playerMoney == 0) {
                 if (confirm("You ran out of Money! \nDo you want to play again?")) {
                     resetAll();
+                    showPlayerStats();
                 }
             }
             else if (playerBet > playerMoney) {
@@ -379,10 +367,27 @@
                 spinResult = Reels();
                 determineWinnings();
                 turn++;
+                showPlayerStats();
             }
             else {
                 alert("Please enter a valid bet amount");
             }
+            //updating the credit Label
+            stage.removeChild(creditLabel);
+            creditLabel = new UIObjects.Label(playerMoney.toString(), "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X - 95, 351, true);
+            stage.addChild(creditLabel);
+            //updating the winnings label
+            stage.removeChild(winningLabel);
+            winningLabel = new UIObjects.Label(winnings.toString(), "20px", "Consoles", "#FFFFFF", Config.Screen.CENTER_X + 95, 351, true);
+            stage.addChild(winningLabel);
+            //updating the turns label
+            stage.removeChild(turnsLabel);
+            turnsLabel = new UIObjects.Label("Turn: " + turn, "20px", "Consoles", "#000000", Config.Screen.CENTER_X + 230, Config.Screen.CENTER_Y + 25, true);
+            stage.addChild(turnsLabel);
+            //updating the winratio label
+            stage.removeChild(winRatioLabel);
+            winRatioLabel = new UIObjects.Label("Ratio: " + (winRatio * 100).toFixed(2) + "%", "20px", "Consoles", "#000000", Config.Screen.CENTER_X + 255, Config.Screen.CENTER_Y + 50, true);
+            stage.addChild(winRatioLabel);
         });
     }
     function Main() {

@@ -52,7 +52,6 @@
         let winNumber = 0;
         let lossNumber = 0;
         let spinResult;
-        let fruits = "";
         let winRatio = 0;
     //#endregion
 
@@ -106,6 +105,10 @@
         stage.update();
     }
  
+    function showPlayerStats()
+    {
+        winRatio = winNumber / turn;
+    }
     function resetFruitTally():void 
     {
         //this function resets fruit tallies
@@ -326,7 +329,7 @@
        jackpotLabel = new UIObjects.Label(jackpot.toString(),"20px","Consoles","#FF0000",Config.Screen.CENTER_X,68,true);
        stage.addChild(jackpotLabel);
        
-              //credits label
+       //credits label
        creditLabel = new UIObjects.Label(playerMoney.toString(),"20px","Consoles","#FFFFFF",Config.Screen.CENTER_X-95,351,true);
        stage.addChild(creditLabel);
 
@@ -424,11 +427,35 @@
             middleReel.image = assets.getResult(reels[1]) as HTMLImageElement;
             rightReel.image = assets.getResult(reels[2]) as HTMLImageElement;
 
+            if (playerMoney == 0)
+            {
+                if (confirm("You ran out of Money! \nDo you want to play again?")) {
+                    resetAll();
+                    showPlayerStats();
+                }
+            }
+            else if (playerBet > playerMoney) {
+                alert("You don't have enough Money to place that bet.");
+            }
+            else if (playerBet < 0) {
+                alert("All bets must be a positive $ amount.");
+            }
+            else if (playerBet <= playerMoney) {
+                spinResult = Reels();
+                determineWinnings();
+                turn++;
+                showPlayerStats();
+            }
+            else {
+                alert("Please enter a valid bet amount");
+            }
+
             //updating the credit Label
             stage.removeChild(creditLabel);
             creditLabel = new UIObjects.Label(playerMoney.toString(),"20px","Consoles","#FFFFFF",Config.Screen.CENTER_X-95,351,true);
             stage.addChild(creditLabel);
      
+            //updating the winnings label
             stage.removeChild(winningLabel);
             winningLabel = new UIObjects.Label(winnings.toString(),"20px","Consoles","#FFFFFF",Config.Screen.CENTER_X+95,351,true);
             stage.addChild(winningLabel);
@@ -442,32 +469,6 @@
             stage.removeChild(winRatioLabel);
             winRatioLabel = new UIObjects.Label("Ratio: "+(winRatio * 100).toFixed(2)+"%","20px","Consoles","#000000",Config.Screen.CENTER_X+255,Config.Screen.CENTER_Y+50,true);
             stage.addChild(winRatioLabel);
-
-            if (playerMoney == 0)
-            {
-                if (confirm("You ran out of Money! \nDo you want to play again?")) {
-                    resetAll();
-                }
-            }
-            else if (playerBet > playerMoney) {
-                alert("You don't have enough Money to place that bet.");
-            }
-            else if (playerBet < 0) {
-                alert("All bets must be a positive $ amount.");
-            }
-            else if (playerBet <= playerMoney) {
-                spinResult = Reels();
-
-
-                determineWinnings();
-                turn++;
-
-            }
-            else {
-                alert("Please enter a valid bet amount");
-            }
-
-            
 
     
         });
